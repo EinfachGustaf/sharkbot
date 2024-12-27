@@ -5,7 +5,7 @@ plugins {
 
     kotlin("jvm") version kotlinVersion
     kotlin("plugin.serialization") version kotlinVersion
-    id("dev.kordex.gradle.kordex") version "1.5.8"
+    id("dev.kordex.gradle.kordex") version "1.6.0"
 }
 
 group = "live.einfachgustaf"

@@ -1,11 +1,14 @@
+import dev.kordex.gradle.plugins.docker.file.*
 import dev.kordex.gradle.plugins.kordex.DataCollection
 
 plugins {
-    val kotlinVersion = "2.1.0"
+    val kotlinVersion = "2.0.21"
+    val kordexVersion = "1.6.0"
 
     kotlin("jvm") version kotlinVersion
     kotlin("plugin.serialization") version kotlinVersion
-    id("dev.kordex.gradle.kordex") version "1.6.0"
+    id("dev.kordex.gradle.kordex") version kordexVersion
+    id("dev.kordex.gradle.docker") version kordexVersion
 }
 
 group = "live.einfachgustaf"
@@ -36,5 +39,32 @@ kordEx {
         dataCollection(DataCollection.None)
 
         mainClass = "live.einfachgustaf.sharkbot.EntrypointKt"
+    }
+}
+
+docker {
+    file(rootProject.file("Dockerfile"))
+
+    commands {
+        from("openjdk:21-jdk-slim")
+        emptyLine()
+        runShell("mkdir -p /bot/plugins")
+        emptyLine()
+        copy("build/libs/sharkbot.jar", "/bot/sharkbot.jar")
+        emptyLine()
+        volume("/bot/data")
+        emptyLine()
+        workdir("/bot")
+        emptyLine()
+        entryPointExec(
+            "java", "-Xmx1G",
+            "-jar", "/bot/sharkbot.jar"
+        )
+    }
+}
+
+tasks {
+    withType<Jar> {
+        archiveFileName.set("sharkbot.jar")
     }
 }

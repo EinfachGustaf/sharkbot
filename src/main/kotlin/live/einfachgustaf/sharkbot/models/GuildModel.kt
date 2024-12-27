@@ -8,12 +8,12 @@ import kotlinx.serialization.Serializable
  * @param id The ID of the guild.
  * @param name The name of the guild.
  * @param owner The owner of the guild.
- * @param language The language of the guild.
+ * @param locale The language/locale of the guild.
  */
 @Serializable
 data class GuildModel(
     val id: Long,
     val name: String? = null,
     val owner: Long? = null,
-    val language: String = "en_US"
+    val locale: String = "en_US"
 )

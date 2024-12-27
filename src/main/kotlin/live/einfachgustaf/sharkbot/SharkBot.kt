@@ -46,7 +46,8 @@ class SharkBot(private val token: String, private val mongoConnectionString: Str
     /**
      * Shutdown the bot.
      */
-    fun shutdown() {
+    suspend fun shutdown() {
         logger.info { "Shutting down the bot..." }
+        bot.stop()
     }
 }

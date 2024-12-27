@@ -39,7 +39,7 @@ class SharkBot(private val token: String, private val mongoConnectionString: Str
         logger.info { "Booting the bot..." }
         bot = ExtensibleBot(token) {
             presence {
-                streaming("EinfachGustaf.live", "https://twitch.tv/einfachgustaf")
+                streaming("EinfachGustaf.live", "https://twitch.tv/einfachnurgustaf")
             }
         }
         kord = bot.kordRef

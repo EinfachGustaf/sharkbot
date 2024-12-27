@@ -1,5 +1,6 @@
 package live.einfachgustaf.sharkbot.localization
 
+import live.einfachgustaf.sharkbot.exception.LocaleNotFoundException
 import java.util.*
 
 /**
@@ -12,7 +13,15 @@ class Localization(language: String) {
     /**
      * The bundle of the localization.
      */
-    val bundle = ResourceBundle.getBundle("lang/$language")
+    var bundle: ResourceBundle; private set
+
+    init {
+        try {
+            bundle = ResourceBundle.getBundle("lang/$language")
+        } catch (e: MissingResourceException) {
+            throw LocaleNotFoundException(language)
+        }
+    }
 
     /**
      * Get a localized string.

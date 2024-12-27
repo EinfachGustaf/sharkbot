@@ -30,8 +30,12 @@ class SharkBot(private val token: String, private val mongoConnectionString: Str
 
     /**
      * Boot the bot.
+     *
+     * @param postInitialize The function to run after the bot has been initialized (pre start).
      */
-    suspend fun boot() {
+    suspend fun boot(
+        postInitialize: suspend SharkBot.() -> Unit = {}
+    ) {
         logger.info { "Booting the bot..." }
         bot = ExtensibleBot(token) {
             presence {
@@ -40,6 +44,7 @@ class SharkBot(private val token: String, private val mongoConnectionString: Str
         }
         kord = bot.kordRef
 
+        postInitialize.invoke(this)
         bot.start()
     }
 

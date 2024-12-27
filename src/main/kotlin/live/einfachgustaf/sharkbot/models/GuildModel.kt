@@ -13,7 +13,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class GuildModel(
     val id: Long,
-    val name: String,
-    val owner: UserModel,
+    val name: String? = null,
+    val owner: Long? = null,
     val language: String = "en_US"
 )

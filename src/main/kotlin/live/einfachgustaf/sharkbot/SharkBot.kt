@@ -1,0 +1,48 @@
+package live.einfachgustaf.sharkbot
+
+import dev.kord.core.Kord
+import dev.kordex.core.ExtensibleBot
+import live.einfachgustaf.sharkbot.db.MongoConnector
+import live.einfachgustaf.sharkbot.utils.logger
+
+/**
+ * The SharkBot class.
+ *
+ * @param token The token for the bot.
+ * @param mongoConnectionString The connection string for the MongoDB database.
+ */
+class SharkBot(private val token: String, private val mongoConnectionString: String, mongoDatabaseName: String) {
+
+    /**
+     * The Mongo connector.
+     */
+    val mongoConnector = MongoConnector(mongoConnectionString, mongoDatabaseName)
+
+    /**
+     * The Kord object used for accessing the discord api
+     */
+    lateinit var kord: Kord; private set
+
+    /**
+     * The bot object used for extending the bot
+     */
+    lateinit var bot: ExtensibleBot; private set
+
+    /**
+     * Boot the bot.
+     */
+    suspend fun boot() {
+        logger.info { "Booting the bot..." }
+        bot = ExtensibleBot(token) {}
+        kord = bot.kordRef
+
+        bot.start()
+    }
+
+    /**
+     * Shutdown the bot.
+     */
+    fun shutdown() {
+        logger.info { "Shutting down the bot..." }
+    }
+}

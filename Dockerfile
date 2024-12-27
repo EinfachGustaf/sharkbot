@@ -7,7 +7,7 @@ RUN mkdir -p /bot/plugins
 
 COPY [ "build/libs/sharkbot.jar", "/bot/sharkbot.jar" ]
 
-VOLUME [ "/bot/data" ]
+VOLUME [ "/bot/plugins" ]
 
 WORKDIR /bot
 

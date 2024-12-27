@@ -52,7 +52,7 @@ docker {
         emptyLine()
         copy("build/libs/sharkbot.jar", "/bot/sharkbot.jar")
         emptyLine()
-        volume("/bot/data")
+        volume("/bot/plugins")
         emptyLine()
         workdir("/bot")
         emptyLine()

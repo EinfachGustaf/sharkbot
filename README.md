@@ -14,7 +14,7 @@ A Discord bot containing various features. Used for the EinfachGustaf(.live) Dis
 - [ ] Music
   - [ ] Play music from YouTube
   - [ ] Play music from Spotify
-  - 
+
 ## 🚀 Installation
 Currently, there is no way to install SharkBot on your own server. This might change in the future. At the moment, you have to compile the bot yourself.
 
